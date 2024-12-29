@@ -22,6 +22,12 @@ const Navbar: React.FC = () => {
 
             <Box sx={{display: "flex", alignItems: "center", justifyContent: "flex-end", marginRight: "2%"}}>
                 <Button variant="contained" style={{backgroundColor: "black", color: "white", borderRadius: "20px"}}>
+                    Clear
+                </Button>
+            </Box>
+
+            <Box sx={{display: "flex", alignItems: "center", justifyContent: "flex-end", marginRight: "2%"}}>
+                <Button variant="contained" style={{backgroundColor: "black", color: "white", borderRadius: "20px"}}>
                     Export
                 </Button>
             </Box>

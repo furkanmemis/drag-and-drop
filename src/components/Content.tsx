@@ -1,5 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
+import Page from "./Page";
 
 
 const Content: React.FC = () =>{
@@ -7,7 +8,6 @@ const Content: React.FC = () =>{
         <Box
             sx={{
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "#FFFFF6",
                 minWidth: "60vw",
@@ -15,7 +15,8 @@ const Content: React.FC = () =>{
                 height: "100vh",
             }}
         >
-            <p>content</p>
+            <Page/>
+
         </Box>
     )
 }
