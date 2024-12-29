@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Typography, Box, IconButton, Card, CardContent } from "@mui/material";
+import { Typography, Box, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { CiImageOn } from "react-icons/ci";
-import { MdOndemandVideo } from "react-icons/md";
+import Image from "./ContentType/Image";
+import Video from "./ContentType/Video";
 
 const Media: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -59,36 +59,10 @@ const Media: React.FC = () => {
           {open ? (
             <Grid sx={{ display: "flex", marginLeft: 3 }} spacing={3}>
               <Grid size={6} sx={{ marginRight: 1 }}>
-                <Card square sx={{ width: "8vw", height: "10vh" }}>
-                  <CardContent
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
-                    }}
-                  >
-                    <CiImageOn />
-                    <p>Image</p>
-                  </CardContent>
-                </Card>
+                <Image />
               </Grid>
               <Grid size={6}>
-                <Card square sx={{ width: "8vw", height: "10vh" }}>
-                  <CardContent
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
-                    }}
-                  >
-                    <MdOndemandVideo />
-                    <p>Video</p>
-                  </CardContent>
-                </Card>
+                <Video />
               </Grid>
             </Grid>
           ) : null}

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Typography, Box, IconButton, Card, CardContent } from "@mui/material";
+import { Typography, Box, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { TfiParagraph } from "react-icons/tfi";
-import { FaHeading } from "react-icons/fa6";
+import Paragraph from "./ContentType/Paragraph";
+import Heading from "./ContentType/Heading";
+
 
 
 const Text: React.FC = () => {
@@ -60,20 +61,10 @@ const Text: React.FC = () => {
           {open ? (
             <Grid sx={{ display: "flex", marginLeft: 3 }} spacing={3}>
               <Grid size={6} sx={{marginRight: 1}}>
-                <Card square sx={{ width: "8vw", height: "10vh" }}>
-                  <CardContent>
-                    <FaHeading />
-                    <p>Heading</p>
-                  </CardContent>
-                </Card>
+                <Heading />
               </Grid>
               <Grid size={6}>
-                <Card square sx={{ width: "8vw", height: "10vh" }}>
-                  <CardContent>
-                    <TfiParagraph />
-                    <p>Paragraph</p>
-                  </CardContent>
-                </Card>
+                <Paragraph />
               </Grid>
             </Grid>
           ) : null}
