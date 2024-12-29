@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",                          // Tarayıcılar için modern JavaScript çıktısı.
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],    // Projede kullanılacak standart kütüphaneler.
+      "allowJs": true,                             // JS dosyalarının projede kullanılmasına izin verir.
+      "skipLibCheck": true,                        // Kütüphane dosyalarını kontrol etmeyi atlar.
+      "esModuleInterop": true,                     // CommonJS ve ES Modules uyumluluğunu sağlar.
+      "allowSyntheticDefaultImports": true,        // Default import için uyumluluk.
+      "strict": true,                              // TypeScript için katı denetimleri etkinleştirir.
+      "forceConsistentCasingInFileNames": true,    // Dosya adlarında büyük/küçük harf duyarlılığı sağlar.
+      "module": "ESNext",                          // ESNext modül sistemi.
+      "moduleResolution": "Node",                 // Node.js modül çözümleme stratejisi.
+      "resolveJsonModule": true,                   // JSON dosyalarının import edilmesine izin verir.
+      "isolatedModules": true,                     // Her dosyayı bağımsız bir modül olarak işler.
+      "noEmit": true,                              // Çıktı dosyalarını yazmayı devre dışı bırakır.
+      "jsx": "react-jsx"                           // React 17+ için yeni JSX dönüşümünü kullanır.
+    },
+    "include": ["src"],                            // Derleme için dahil edilecek dosyalar/dizinler.
+    "exclude": ["node_modules", "build"]           // Derleme dışında bırakılacak dosyalar/dizinler.
+  }
