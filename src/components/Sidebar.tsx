@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import Layers from "./Layers";
+import Text from "./Text";
+import Media from "./Media";
 
 const Sidebar: React.FC = () => {
     const [item, setItem] = useState<string[]>([]);
@@ -25,6 +27,8 @@ const Sidebar: React.FC = () => {
             <Button variant="contained" size="small" style={{backgroundColor: "#003366", width: "10vw", marginTop: "4%"}} onClick={()=>{addItem()}}>
                 Add Item
             </Button>
+            <Text />
+            <Media />
             <Layers items={item} />
         </Box>
     );
