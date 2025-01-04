@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import Layers from "./Layers";
 import Text from "./Text";
 import Media from "./Media";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps{
+    newItem: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({newItem}) => {
     const [item, setItem] = useState<string[]>([]);
 
     const addItem = () =>{
         setItem([...item, "Content"])
     };
+
+    useEffect(() => {
+        console.log("side bar -> ", newItem)
+
+        if (newItem !== "") {
+            setItem((prevItems) => [...prevItems, newItem]);
+        }
+    }, [newItem]);
 
     return (
         <Box
@@ -29,7 +41,7 @@ const Sidebar: React.FC = () => {
             </Button>
             <Text />
             <Media />
-            <Layers items={item} />
+            <Layers items={item}/>
         </Box>
     );
 };

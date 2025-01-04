@@ -7,9 +7,11 @@ import Content from "../components/Content";
 const Main: React.FC = () => {
 
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const [add,setAdd] = useState<string>("");
 
   const handleDrop = (itemId: string) => {
     console.log(`Bırakılan öğe: ${itemId}`);
+    setAdd(itemId)
   };
 
   return (
@@ -18,7 +20,7 @@ const Main: React.FC = () => {
         display: "flex",
       }}
     >
-      <Sidebar />
+      <Sidebar newItem={add}/>
       <Content onDrop={handleDrop} onClickSelectedItem={(itemName)=>{setSelectedItem(itemName)}} />
       <RightSidebar selectedItem={selectedItem} />
     </Box>

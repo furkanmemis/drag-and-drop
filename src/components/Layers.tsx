@@ -6,7 +6,7 @@ interface LayerProps {
   items: string[];
 }
 
-const Layers: React.FC<LayerProps> = ({ items }) => {
+const Layers: React.FC<LayerProps> = ({ items}) => {
   const [allComponent, setAllComponent] = useState<string[]>([]);
 
   useEffect(() => {
