@@ -1,7 +1,29 @@
 import React from "react";
 import { Box } from "@mui/material";
+import RSParagraph from "./RightSidebarComponents/RSParagraph";
+import RSHeading from "./RightSidebarComponents/RSHeading";
+import RSVideo from "./RightSidebarComponents/RSVideo";
+import RSImage from "./RightSidebarComponents/RSImage";
 
-const RightSidebar: React.FC = () => {
+interface RightSidebarProps {
+  selectedItem: string;
+}
+
+const RightSidebar: React.FC<RightSidebarProps> = ({ selectedItem }) => {
+  const renderItem = () => {
+    if (selectedItem === "paragraph") {
+      return <RSParagraph />;
+    } else if (selectedItem === "heading") {
+      return <RSHeading />;
+    } else if (selectedItem === "video") {
+      return <RSVideo />;
+    }else if(selectedItem === "image"){
+      return <RSImage />
+    } else {
+      return null;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -13,7 +35,7 @@ const RightSidebar: React.FC = () => {
       }}
     >
       <div>
-        <p style={{textAlign: "center"}}>right sidebar</p>
+        {renderItem()}
       </div>
     </Box>
   );

@@ -1,10 +1,14 @@
 import React from "react";
 
-const EditVideo: React.FC = () => {
-    const videoId = "drdX7w-tLt0"; // Sabit video ID'si
+interface EditVideoProps{
+    onClickVideo: (itemName: string) => void;
+}
+
+const EditVideo: React.FC<EditVideoProps> = ({onClickVideo}) => {
+    const videoId = "drdX7w-tLt0";
 
     return (
-        <div>
+        <div onClick={()=>{onClickVideo('video')}} style={{padding: "3%", backgroundColor: "white"}}>
             <iframe 
                 width="100%" 
                 height="300" 
@@ -12,6 +16,7 @@ const EditVideo: React.FC = () => {
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
                 title="Embedded YouTube video"
+                onClick={()=>{onClickVideo('video')}}
             ></iframe>
         </div>
     );

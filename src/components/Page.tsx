@@ -9,9 +9,10 @@ import Grid from "@mui/material/Grid2";
 
 interface DropTargetProps {
   onDrop: (itemId: string) => void;
+  onClickSelectedItem: (itemName: string) => void;
 }
 
-const Page: React.FC<DropTargetProps> = ({ onDrop }) => {
+const Page: React.FC<DropTargetProps> = ({ onDrop, onClickSelectedItem }) => {
   const [droppedItems, setDroppedItems] = React.useState<string[]>([]);
   const dropRef = useRef(null);
 
@@ -32,29 +33,49 @@ const Page: React.FC<DropTargetProps> = ({ onDrop }) => {
     }
   }, [drop, dropRef]);
 
+  const handleSelectedItem = (itemName: string) => {
+    onClickSelectedItem(itemName);
+  };
+
   const renderItem = (item: string) => {
     if (item === "paragraph") {
       return (
         <Grid size={12}>
-          <EditParagraph />
+          <EditParagraph
+            onClickParagraph={(itemName) => {
+              handleSelectedItem(itemName);
+            }}
+          />
         </Grid>
       );
     } else if (item === "heading") {
-      return(
+      return (
         <Grid size={12}>
-          <EditHeading />
+          <EditHeading
+            onClickHeading={(itemName) => {
+              handleSelectedItem(itemName);
+            }}
+          />
         </Grid>
-      )
+      );
     } else if (item === "image") {
-      return(
+      return (
         <Grid size={12}>
-          <EditImage />
+          <EditImage
+            onClickImage={(itemName) => {
+              handleSelectedItem(itemName);
+            }}
+          />
         </Grid>
-      ) 
+      );
     } else if (item === "video") {
       return (
         <Grid size={12}>
-          <EditVideo />
+          <EditVideo
+            onClickVideo={(itemName) => {
+              handleSelectedItem(itemName);
+            }}
+          />
         </Grid>
       );
     }
@@ -66,13 +87,14 @@ const Page: React.FC<DropTargetProps> = ({ onDrop }) => {
         sx={{
           height: "auto",
           minHeight: "30vh",
-          maxHeight: "90vh",
-          backgroundColor: "lightgray",
+          maxHeight: "80vh",
+          backgroundColor: "whitesmoke",
           width: "40vw",
           marginTop: "5%",
           overflow: "auto",
           padding: "5%",
-          textAlign: "center"
+          textAlign: "center",
+          border: "2px solid rgba(0, 0, 0, 0.2)",
         }}
       >
         <Typography variant="h6">
@@ -80,7 +102,9 @@ const Page: React.FC<DropTargetProps> = ({ onDrop }) => {
         </Typography>
 
         {droppedItems.map((item) => (
-          <Grid sx={{margin: "2%"}} container>{renderItem(item)}</Grid>
+          <Grid sx={{ margin: "2%" }} container>
+            {renderItem(item)}
+          </Grid>
         ))}
       </Box>
     </div>

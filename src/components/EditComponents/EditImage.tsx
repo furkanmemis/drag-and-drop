@@ -1,9 +1,12 @@
 import React from "react";
 
+interface EditImageProps{
+    onClickImage: (itemName: string) => void;
+}
 
-const EditImage: React.FC = () =>{
+const EditImage: React.FC<EditImageProps> = ({onClickImage}) =>{
     return(
-        <div>
+        <div onClick={()=>{onClickImage('image')}}>
             <img src="/turk.png" alt="EditImage"/>
         </div>
     )

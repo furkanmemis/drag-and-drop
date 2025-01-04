@@ -4,9 +4,10 @@ import Page from "./Page";
 
 interface DropTargetProps {
   onDrop: (itemId: string) => void;
+  onClickSelectedItem: (itemName: string) => void;
 }
 
-const Content: React.FC<DropTargetProps> = ({onDrop}) => {
+const Content: React.FC<DropTargetProps> = ({onDrop, onClickSelectedItem}) => {
 
   return (
     <Box
@@ -19,7 +20,7 @@ const Content: React.FC<DropTargetProps> = ({onDrop}) => {
         height: "100vh",
       }}
     >
-      <Page onDrop={onDrop} />
+      <Page onDrop={onDrop} onClickSelectedItem={(itemName)=>{onClickSelectedItem(itemName)}} />
     </Box>
   );
 };
