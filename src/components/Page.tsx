@@ -101,11 +101,13 @@ const Page: React.FC<DropTargetProps> = ({ onDrop, onClickSelectedItem }) => {
           {isOver ? "Drop here" : "Drop your items"}
         </Typography>
 
-        {droppedItems.map((item) => (
-          <Grid sx={{ margin: "2%" }} container>
-            {renderItem(item)}
-          </Grid>
-        ))}
+        <div style={{opacity: isOver ? 0.3 : 1}}>
+          {droppedItems.map((item) => (
+            <Grid sx={{ margin: "2%" }} container>
+              {renderItem(item)}
+            </Grid>
+          ))}
+        </div>
       </Box>
     </div>
   );
