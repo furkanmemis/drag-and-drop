@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, TextField, Divider } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import FontFamilySelector from "./FontFamilySelector";
 import FontWeightSelector from "./FontWeightSelector";
 import { Paragraph } from "../../Models/Paragraph";
 import RowsSelector from "./RowsSelector";
 import FontSizeSelector from "./FonstSizeSelector";
+import Text from "./Text";
 
 interface RSParagrapProps{
   item: Paragraph;
@@ -31,12 +32,7 @@ const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <TextField
-          label="Paragraph"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <Text label="Paragraph" content={paragraph?.properties.text || ""} />
       </Grid>
 
       <Grid size={12}>

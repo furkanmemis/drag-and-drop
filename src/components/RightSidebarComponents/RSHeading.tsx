@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, TextField, Divider } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import FontFamilySelector from "./FontFamilySelector";
 import FontWeightSelector from "./FontWeightSelector";
 import { Heading } from "../../Models/Heading";
 import RowsSelector from "./RowsSelector";
 import FontSizeSelector from "./FonstSizeSelector";
+import Text from "./Text";
 
 interface RSHeadingProps{
   item: Heading;
@@ -32,12 +33,7 @@ const RSHeading: React.FC<RSHeadingProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <TextField
-          label="Heading"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <Text label="Heading" content={heading?.properties.text || ""} />
       </Grid>
 
       <Grid size={12}>
