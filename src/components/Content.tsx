@@ -20,7 +20,7 @@ const Content: React.FC<DropTargetProps> = ({onDrop, onClickSelectedItem}) => {
         height: "100vh",
       }}
     >
-      <Page onDrop={onDrop} onClickSelectedItem={(itemName)=>{onClickSelectedItem(itemName)}} />
+      <Page onDrop={onDrop} onClickSelectedItem={(itemName)=>{onClickSelectedItem(itemName)}}/>
     </Box>
   );
 };

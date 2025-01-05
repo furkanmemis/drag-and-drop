@@ -7,14 +7,19 @@ import EditImage from "./EditComponents/EditImage";
 import EditVideo from "./EditComponents/EditVideo";
 import Grid from "@mui/material/Grid2";
 
+
 interface DropTargetProps {
   onDrop: (itemId: string) => void;
   onClickSelectedItem: (itemName: string) => void;
 }
 
-const Page: React.FC<DropTargetProps> = ({ onDrop, onClickSelectedItem }) => {
+const Page: React.FC<DropTargetProps> = ({
+  onDrop,
+  onClickSelectedItem,
+}) => {
   const [droppedItems, setDroppedItems] = React.useState<string[]>([]);
   const dropRef = useRef(null);
+
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "ITEM",
@@ -36,6 +41,8 @@ const Page: React.FC<DropTargetProps> = ({ onDrop, onClickSelectedItem }) => {
   const handleSelectedItem = (itemName: string) => {
     onClickSelectedItem(itemName);
   };
+
+
 
   const renderItem = (item: string) => {
     if (item === "paragraph") {
@@ -101,7 +108,7 @@ const Page: React.FC<DropTargetProps> = ({ onDrop, onClickSelectedItem }) => {
           {isOver ? "Drop here" : "Drop your items"}
         </Typography>
 
-        <div style={{opacity: isOver ? 0.3 : 1}}>
+        <div style={{ opacity: isOver ? 0.3 : 1 }}>
           {droppedItems.map((item) => (
             <Grid sx={{ margin: "2%" }} container>
               {renderItem(item)}

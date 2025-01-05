@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import { Typography, Box, Button } from "@mui/material";
+import { StyleItem } from "../Models/StyleItem";
 
-const Navbar: React.FC = () => {
+interface NavbarProps{
+    list: StyleItem[];
+}
+
+const Navbar: React.FC<NavbarProps> = ({list}) => {
+
+    const [styleList,setStyleList] = useState<StyleItem[]>([]);
+
+    useEffect(()=>{
+        setStyleList(list);
+    },[list]);
+
+
+    const handleDownload = () => {
+
+        let download = {
+            "elements": styleList
+        }
+    
+        const blob = new Blob([JSON.stringify(download, null, 2)], {
+          type: "application/json",
+        });
+    
+        const url = URL.createObjectURL(blob);
+    
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "style.json";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    
+        URL.revokeObjectURL(url);
+      };
+
     return (
         <Box 
             sx={{
@@ -27,7 +62,7 @@ const Navbar: React.FC = () => {
             </Box>
 
             <Box sx={{display: "flex", alignItems: "center", justifyContent: "flex-end", marginRight: "2%"}}>
-                <Button variant="contained" style={{backgroundColor: "black", color: "white", borderRadius: "20px"}}>
+                <Button variant="contained" style={{backgroundColor: "black", color: "white", borderRadius: "20px"}} onClick={()=>{handleDownload()}}>
                     Export
                 </Button>
             </Box>
