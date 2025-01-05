@@ -8,14 +8,35 @@ import MediaSource from "./MediaSource";
 
 interface RSImageProps {
   item: Image;
+  index: number;
+  onChangeImage: (newImage: Image, index: number) => void;
 }
 
-const RSImage: React.FC<RSImageProps> = ({ item }) => {
+const RSImage: React.FC<RSImageProps> = ({ item, index, onChangeImage }) => {
   const [image, setImage] = useState<Image>();
+  const [selectedIndex, setSelectedIndex] = useState<number>();
 
   useEffect(() => {
     setImage(item);
-  }, [item]);
+    if(index !== -1){
+      setSelectedIndex(index);
+    }
+  }, [item, index]);
+
+  const handleImageChange = (
+    field: keyof Image["properties"],
+    newValue: any
+  ) => {
+    const updatedImage = {
+      ...image,
+      properties: {
+        ...image?.properties,
+        [field]: newValue,
+      },
+    };
+    setImage(updatedImage as Image);
+    onChangeImage(updatedImage as Image, selectedIndex ?? -1);
+  };
 
   return (
     <Grid
@@ -33,6 +54,9 @@ const RSImage: React.FC<RSImageProps> = ({ item }) => {
         <MediaSource
           label="Image Source"
           source={image?.properties.src || ""}
+          onChangeSource={(newSource) => {
+            handleImageChange("src", newSource);
+          }}
         />
       </Grid>
 
@@ -43,11 +67,21 @@ const RSImage: React.FC<RSImageProps> = ({ item }) => {
       </Grid>
 
       <Grid size={6}>
-        <HeightSelector value={image?.properties.height ?? 250} />
+        <HeightSelector
+          value={image?.properties.height ?? 250}
+          onChangeHeight={(newHeight) => {
+            handleImageChange("height", newHeight);
+          }}
+        />
       </Grid>
 
       <Grid size={6}>
-        <WidthSelector num={image?.properties.width ?? 350} />
+        <WidthSelector
+          num={image?.properties.width ?? 350}
+          onChangeWidth={(newWidth) => {
+            handleImageChange("width", newWidth);
+          }}
+        />
       </Grid>
     </Grid>
   );

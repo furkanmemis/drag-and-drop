@@ -3,9 +3,10 @@ import { TextField } from "@mui/material";
 
 interface WidthSelectorProps {
   num: number;
+  onChangeWidth: (newWidth: number) => void;
 }
 
-const WidthSelector: React.FC<WidthSelectorProps> = ({ num }) => {
+const WidthSelector: React.FC<WidthSelectorProps> = ({ num, onChangeWidth }) => {
   const [width, setWidth] = useState<number>();
 
   useEffect(() => {
@@ -21,6 +22,11 @@ const WidthSelector: React.FC<WidthSelectorProps> = ({ num }) => {
         size="small"
         style={{ width: "100%" }}
         type="number"
+        onChange={(e)=>{
+          const newWidth = Number(e.target.value);
+          setWidth(newWidth);
+          onChangeWidth(newWidth);
+        }}
       />
     </div>
   );

@@ -10,15 +10,34 @@ import Text from "./Text";
 
 interface RSHeadingProps{
   item: Heading;
+  index: number;
+  onChangeHeading: (newHeading: Heading, index: number) => void;
 }
 
-const RSHeading: React.FC<RSHeadingProps> = ({item}) => {
+const RSHeading: React.FC<RSHeadingProps> = ({item, index, onChangeHeading}) => {
 
   const [heading,setHeading] = useState<Heading>();
+  const [selectedIndex, setSelectedIndex] = useState<number>();
 
   useEffect(()=>{
     setHeading(item);
-  },[item])
+    if(index !== -1){
+      setSelectedIndex(index);
+    }
+  },[item,index])
+
+
+    const handleHeadingChange = (field: keyof Heading["properties"], newValue: any) => {
+      const updatedHeading = {
+        ...heading,
+        properties: {
+          ...heading?.properties,
+          [field]: newValue,
+        },
+      };
+      setHeading(updatedHeading as Heading);
+      onChangeHeading(updatedHeading as Heading, selectedIndex ?? -1);
+    };
 
   return (
     <Grid
@@ -33,7 +52,7 @@ const RSHeading: React.FC<RSHeadingProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <Text label="Heading" content={heading?.properties.text || ""} />
+        <Text label="Heading" content={heading?.properties.text || ""} onText={(newText) => {handleHeadingChange("text",newText)}} />
       </Grid>
 
       <Grid size={12}>
@@ -47,11 +66,11 @@ const RSHeading: React.FC<RSHeadingProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <FontFamilySelector font={heading?.properties.fontFamily || "italic"} />
+        <FontFamilySelector font={heading?.properties.fontFamily || "italic"} onFamilyChange={(newFamily)=>{handleHeadingChange("fontFamily",newFamily)}} />
       </Grid>
 
       <Grid size={12}>
-        <FontWeightSelector weight={heading?.properties.fontWeight || "semibold"} />
+        <FontWeightSelector weight={heading?.properties.fontWeight || "semibold"} onWeightChange={(newWeight)=>{handleHeadingChange("fontWeight",newWeight)}} />
       </Grid>
 
       <Grid size={12}>
@@ -61,11 +80,11 @@ const RSHeading: React.FC<RSHeadingProps> = ({item}) => {
       </Grid>
 
       <Grid size={6}>
-        <FontSizeSelector size={heading?.properties.fontSize ?? 18} />
+        <FontSizeSelector size={heading?.properties.fontSize ?? 18} onSizeChange={(newSize) => {handleHeadingChange("fontSize",newSize)}} />
       </Grid>
 
       <Grid size={6}>
-        <RowsSelector rows={heading?.properties.rowsNumber ?? 1} />
+        <RowsSelector rows={heading?.properties.rowsNumber ?? 1} onRowsChange={(newRow) => {handleHeadingChange("rowsNumber",newRow)}} />
       </Grid>
     </Grid>
   );

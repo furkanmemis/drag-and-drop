@@ -8,14 +8,35 @@ import MediaSource from "./MediaSource";
 
 interface RSVideoProps {
   item: Video;
+  index: number;
+  onChangeVideo: (newVideo: Video, index: number) => void;
 }
 
-const RSVideo: React.FC<RSVideoProps> = ({ item }) => {
+const RSVideo: React.FC<RSVideoProps> = ({ item, index, onChangeVideo }) => {
   const [video, setVideo] = useState<Video>();
+  const [selectedIndex, setSelectedIndex] = useState<number>();
 
   useEffect(() => {
     setVideo(item);
-  }, [item]);
+    if (index !== -1) {
+      setSelectedIndex(index);
+    }
+  }, [item, index]);
+
+  const handleVideoChange = (
+    field: keyof Video["properties"],
+    newValue: any
+  ) => {
+    const updatedVideo = {
+      ...video,
+      properties: {
+        ...video?.properties,
+        [field]: newValue,
+      },
+    };
+    setVideo(updatedVideo as Video);
+    onChangeVideo(updatedVideo as Video, selectedIndex ?? -1);
+  };
 
   return (
     <Grid
@@ -33,6 +54,9 @@ const RSVideo: React.FC<RSVideoProps> = ({ item }) => {
         <MediaSource
           label="Media Source"
           source={video?.properties.src || ""}
+          onChangeSource={(newSource) => {
+            handleVideoChange("src", newSource);
+          }}
         />
       </Grid>
 
@@ -43,11 +67,21 @@ const RSVideo: React.FC<RSVideoProps> = ({ item }) => {
       </Grid>
 
       <Grid size={6}>
-        <HeightSelector value={video?.properties.height ?? 350} />
+        <HeightSelector
+          value={video?.properties.height ?? 350}
+          onChangeHeight={(newHeight) => {
+            handleVideoChange("height", newHeight);
+          }}
+        />
       </Grid>
 
       <Grid size={6}>
-        <WidthSelector num={video?.properties.width || 250} />
+        <WidthSelector
+          num={video?.properties.width || 250}
+          onChangeWidth={(newWidth) => {
+            handleVideoChange("width", newWidth);
+          }}
+        />
       </Grid>
     </Grid>
   );

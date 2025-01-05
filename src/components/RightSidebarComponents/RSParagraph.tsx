@@ -10,14 +10,33 @@ import Text from "./Text";
 
 interface RSParagrapProps{
   item: Paragraph;
+  index: number;
+  onChangeParagraph: (newParagraph: Paragraph, index: number) => void;
 }
 
-const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
+const RSParagraph: React.FC<RSParagrapProps> = ({item, index, onChangeParagraph}) => {
   const [paragraph,setParagraph] = useState<Paragraph>();
+  const [selectedIndex, setSelectedIndex] = useState<number>();
 
   useEffect(()=>{
     setParagraph(item);
-  },[item])
+    if(index !== -1){
+      setSelectedIndex(index);
+    }
+  },[item, index])
+
+
+  const handleParagraphChange = (field: keyof Paragraph["properties"], newValue: any) => {
+    const updatedParagraph = {
+      ...paragraph,
+      properties: {
+        ...paragraph?.properties,
+        [field]: newValue,
+      },
+    };
+    setParagraph(updatedParagraph as Paragraph);
+    onChangeParagraph(updatedParagraph as Paragraph, selectedIndex ?? -1);
+  };
 
   return (
     <Grid
@@ -32,7 +51,7 @@ const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <Text label="Paragraph" content={paragraph?.properties.text || ""} />
+        <Text label="Paragraph" content={paragraph?.properties.text || ""} onText={(newText) => {handleParagraphChange("text",newText)}} />
       </Grid>
 
       <Grid size={12}>
@@ -46,11 +65,11 @@ const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
       </Grid>
 
       <Grid size={12}>
-        <FontFamilySelector font={paragraph?.properties.fontFamily || "arial"} />
+        <FontFamilySelector font={paragraph?.properties.fontFamily || "arial"} onFamilyChange={(newFamily) => {handleParagraphChange("fontFamily",newFamily)}} />
       </Grid>
 
       <Grid size={12}>
-        <FontWeightSelector weight={paragraph?.properties.fontWeight || "bold"}/>
+        <FontWeightSelector weight={paragraph?.properties.fontWeight || "bold"} onWeightChange={(newWeight)=>{handleParagraphChange("fontFamily",newWeight)}}/>
       </Grid>
 
       <Grid size={12}>
@@ -60,11 +79,11 @@ const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
       </Grid>
 
       <Grid size={6}>
-        <FontSizeSelector size={paragraph?.properties.fontSize ?? 14} />
+        <FontSizeSelector size={paragraph?.properties.fontSize ?? 14} onSizeChange={(newSize) => {handleParagraphChange("fontSize", newSize)}} />
       </Grid>
 
       <Grid size={6}>
-        <RowsSelector rows={paragraph?.properties.rowsNumber ?? 2} />
+        <RowsSelector rows={paragraph?.properties.rowsNumber ?? 2} onRowsChange={(newRow) => {handleParagraphChange("rowsNumber",newRow)}} />
       </Grid>
     </Grid>
   );

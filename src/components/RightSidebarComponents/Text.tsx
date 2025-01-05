@@ -4,14 +4,21 @@ import { TextField } from "@mui/material";
 interface TextProps {
   label: string;
   content: string;
+  onText: (newText: string) => void;
 }
 
-const Text: React.FC<TextProps> = ({ label, content }) => {
+const Text: React.FC<TextProps> = ({ label, content, onText }) => {
   const [text, setText] = useState<string>("");
 
   useEffect(() => {
     setText(content);
   }, [content]);
+
+
+  const handleChange = (value: string) => {
+    setText(value);
+    onText(value);
+  };
 
   return (
     <div>
@@ -21,6 +28,7 @@ const Text: React.FC<TextProps> = ({ label, content }) => {
         fullWidth
         size="small"
         style={{ width: "100%" }}
+        onChange={(e) => {handleChange(e.target.value)}}
       />
     </div>
   );

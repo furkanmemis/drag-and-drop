@@ -3,9 +3,10 @@ import { Select, MenuItem } from "@mui/material";
 
 interface FontSelectorProps {
   font: string;
+  onFamilyChange: (newFamily: string) => void;
 }
 
-const FontFamilySelector: React.FC<FontSelectorProps> = ({ font }) => {
+const FontFamilySelector: React.FC<FontSelectorProps> = ({ font, onFamilyChange }) => {
   const [selectedFont, setSelectedFont] = useState<string>("");
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const FontFamilySelector: React.FC<FontSelectorProps> = ({ font }) => {
       value={selectedFont}
       onChange={(e) => {
         setSelectedFont(e.target.value);
+        onFamilyChange(e.target.value);
       }}
       displayEmpty
       size="small"

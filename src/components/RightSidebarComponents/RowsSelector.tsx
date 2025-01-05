@@ -3,9 +3,10 @@ import { TextField } from "@mui/material";
 
 interface RowsSelectorProps {
   rows: number;
+  onRowsChange: (newRow: number) => void;
 }
 
-const RowsSelector: React.FC<RowsSelectorProps> = ({ rows }) => {
+const RowsSelector: React.FC<RowsSelectorProps> = ({ rows, onRowsChange }) => {
   const [num, setNum] = useState<number>();
 
   useEffect(() => {
@@ -20,6 +21,11 @@ const RowsSelector: React.FC<RowsSelectorProps> = ({ rows }) => {
         type="number"
         size="small"
         fullWidth
+        onChange={(e)=>{
+          const value = Number(e.target.value);
+          setNum(value);
+          onRowsChange(value);
+        }}
       />
     </div>
   );

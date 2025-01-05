@@ -3,11 +3,12 @@ import { Select, MenuItem } from "@mui/material";
 
 interface FontWeightSelectorProps {
   weight: string;
+  onWeightChange: (newWeight: string) => void;
 }
 
 //"bold" | "semibold" | "medium" | "thin"
 
-const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight }) => {
+const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight, onWeightChange }) => {
   const [selectedWeight, setSelectedWeight] = useState<string>("");
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight }) => {
       value={selectedWeight}
       onChange={(e) => {
         setSelectedWeight(e.target.value);
+        onWeightChange(e.target.value);
       }}
       displayEmpty
       size="small"
