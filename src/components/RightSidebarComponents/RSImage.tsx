@@ -1,8 +1,22 @@
-import React from "react";
-import { Typography, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { Image } from "../../Models/Image";
+import WidthSelector from "./WidthSelector";
+import HeightSelector from "./HeightSelector";
+import MediaSource from "./MediaSource";
 
-const RSImage: React.FC = () => {
+interface RSImageProps {
+  item: Image;
+}
+
+const RSImage: React.FC<RSImageProps> = ({ item }) => {
+  const [image, setImage] = useState<Image>();
+
+  useEffect(() => {
+    setImage(item);
+  }, [item]);
+
   return (
     <Grid
       container
@@ -16,11 +30,9 @@ const RSImage: React.FC = () => {
       </Grid>
 
       <Grid size={12}>
-        <TextField
+        <MediaSource
           label="Image Source"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
+          source={image?.properties.src || ""}
         />
       </Grid>
 
@@ -31,21 +43,11 @@ const RSImage: React.FC = () => {
       </Grid>
 
       <Grid size={6}>
-        <TextField
-          label="Height"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <HeightSelector value={image?.properties.height ?? 250} />
       </Grid>
 
       <Grid size={6}>
-        <TextField
-          label="Width"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <WidthSelector num={image?.properties.width ?? 350} />
       </Grid>
     </Grid>
   );

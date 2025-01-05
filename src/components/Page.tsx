@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid2";
 
 interface DropTargetProps {
   onDrop: (itemId: string) => void;
-  onClickSelectedItem: (itemName: string) => void;
+  onClickSelectedItem: (itemName: string, selectedIndex: number) => void;
 }
 
 const Page: React.FC<DropTargetProps> = ({
@@ -38,19 +38,19 @@ const Page: React.FC<DropTargetProps> = ({
     }
   }, [drop, dropRef]);
 
-  const handleSelectedItem = (itemName: string) => {
-    onClickSelectedItem(itemName);
+  const handleSelectedItem = (itemName: string, index: number) => {
+    onClickSelectedItem(itemName,index);
   };
 
 
 
-  const renderItem = (item: string) => {
+  const renderItem = (item: string, selectedIndex: number) => {
     if (item === "paragraph") {
       return (
         <Grid size={12}>
           <EditParagraph
             onClickParagraph={(itemName) => {
-              handleSelectedItem(itemName);
+              handleSelectedItem(itemName,selectedIndex);
             }}
           />
         </Grid>
@@ -60,7 +60,7 @@ const Page: React.FC<DropTargetProps> = ({
         <Grid size={12}>
           <EditHeading
             onClickHeading={(itemName) => {
-              handleSelectedItem(itemName);
+              handleSelectedItem(itemName,selectedIndex);
             }}
           />
         </Grid>
@@ -70,7 +70,7 @@ const Page: React.FC<DropTargetProps> = ({
         <Grid size={12}>
           <EditImage
             onClickImage={(itemName) => {
-              handleSelectedItem(itemName);
+              handleSelectedItem(itemName,selectedIndex);
             }}
           />
         </Grid>
@@ -80,7 +80,7 @@ const Page: React.FC<DropTargetProps> = ({
         <Grid size={12}>
           <EditVideo
             onClickVideo={(itemName) => {
-              handleSelectedItem(itemName);
+              handleSelectedItem(itemName,selectedIndex);
             }}
           />
         </Grid>
@@ -109,9 +109,9 @@ const Page: React.FC<DropTargetProps> = ({
         </Typography>
 
         <div style={{ opacity: isOver ? 0.3 : 1 }}>
-          {droppedItems.map((item) => (
+          {droppedItems.map((item,index) => (
             <Grid sx={{ margin: "2%" }} container>
-              {renderItem(item)}
+              {renderItem(item,index)}
             </Grid>
           ))}
         </div>

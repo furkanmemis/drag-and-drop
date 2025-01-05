@@ -5,6 +5,8 @@ interface FontWeightSelectorProps {
   weight: string;
 }
 
+//"bold" | "semibold" | "medium" | "thin"
+
 const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight }) => {
   const [selectedWeight, setSelectedWeight] = useState<string>("");
 
@@ -21,10 +23,10 @@ const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight }) => {
       displayEmpty
       size="small"
     >
-      <MenuItem value="Normal">Normal</MenuItem>
-      <MenuItem value="Bold">Bold</MenuItem>
-      <MenuItem value="Bolder">Bolder</MenuItem>
-      <MenuItem value="Lighter">Lighter</MenuItem>
+      <MenuItem value="bold">Bold</MenuItem>
+      <MenuItem value="semibold">Semibold</MenuItem>
+      <MenuItem value="medium">Medium</MenuItem>
+      <MenuItem value="thin">Thin</MenuItem>
     </Select>
   );
 };

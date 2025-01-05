@@ -22,11 +22,11 @@ const FontFamilySelector: React.FC<FontSelectorProps> = ({ font }) => {
       displayEmpty
       size="small"
     >
-      <MenuItem value="Arial">Arial</MenuItem>
-      <MenuItem value="Italic">Italic</MenuItem>
-      <MenuItem value="Times New Roman">Times New Roman</MenuItem>
-      <MenuItem value="Verdana">Verdana</MenuItem>
-      <MenuItem value="Georgia">Georgia</MenuItem>
+      <MenuItem value="arial">Arial</MenuItem>
+      <MenuItem value="italic">Italic</MenuItem>
+      <MenuItem value="times-new-roman">Times New Roman</MenuItem>
+      <MenuItem value="verdana">Verdana</MenuItem>
+      <MenuItem value="georgia">Georgia</MenuItem>
     </Select>
   );
 };

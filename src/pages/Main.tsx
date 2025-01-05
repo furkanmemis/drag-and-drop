@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import RightSidebar from "../components/RightSidebar";
@@ -16,18 +16,14 @@ interface MainProps{
 
 const Main: React.FC<MainProps> = ({onChangeList}) => {
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0);
   const [add, setAdd] = useState<string>("");
   const [styleList, setStyleList] = useState<StyleItem[]>([]);
 
   const handleDrop = (itemId: string) => {
-    console.log(`Bırakılan öğe: ${itemId}`);
     setAdd(itemId);
     addStyle(itemId);
   };
-
-  useEffect(() => {
-    console.log("new styleList main ->", styleList);
-  }, [styleList]);
 
   const addStyle = (type: string) => {
     const newStyleItem: StyleItem = (() => {
@@ -54,9 +50,11 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
           return {
             type: "paragraph",
             properties: {
-              fontFamily: "arial",
+              fontFamily: "italic",
               fontWeight: "medium",
               text: "",
+              rowsNumber: 3,
+              fontSize: 14
             },
           } as Paragraph;
         case "heading":
@@ -66,6 +64,8 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
               fontFamily: "arial",
               fontWeight: "bold",
               text: "",
+              rowsNumber: 1,
+              fontSize: 18
             },
           } as Heading;
         default:
@@ -89,11 +89,12 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
       <Sidebar newItem={add} />
       <Content
         onDrop={handleDrop}
-        onClickSelectedItem={(itemName) => {
+        onClickSelectedItem={(itemName,selectedIndex) => {
           setSelectedItem(itemName);
+          setSelectedItemIndex(selectedIndex);
         }}
       />
-      <RightSidebar selectedItem={selectedItem} />
+      <RightSidebar selectedItem={selectedItem} index={selectedItemIndex} list={styleList} />
     </Box>
   );
 };

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, TextField, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import FontFamilySelector from "./FontFamilySelector";
 import FontWeightSelector from "./FontWeightSelector";
+import { Paragraph } from "../../Models/Paragraph";
+import RowsSelector from "./RowsSelector";
+import FontSizeSelector from "./FonstSizeSelector";
 
-const RSParagraph: React.FC = () => {
+interface RSParagrapProps{
+  item: Paragraph;
+}
+
+const RSParagraph: React.FC<RSParagrapProps> = ({item}) => {
+  const [paragraph,setParagraph] = useState<Paragraph>();
+
+  useEffect(()=>{
+    setParagraph(item);
+  },[item])
+
   return (
     <Grid
       container
@@ -37,11 +50,11 @@ const RSParagraph: React.FC = () => {
       </Grid>
 
       <Grid size={12}>
-        <FontFamilySelector font="Arial" />
+        <FontFamilySelector font={paragraph?.properties.fontFamily || "arial"} />
       </Grid>
 
       <Grid size={12}>
-        <FontWeightSelector weight="Bold" />
+        <FontWeightSelector weight={paragraph?.properties.fontWeight || "bold"}/>
       </Grid>
 
       <Grid size={12}>
@@ -51,11 +64,11 @@ const RSParagraph: React.FC = () => {
       </Grid>
 
       <Grid size={6}>
-        <TextField label="Font Size" type="number" size="small" fullWidth />
+        <FontSizeSelector size={paragraph?.properties.fontSize ?? 14} />
       </Grid>
 
       <Grid size={6}>
-        <TextField label="Row Number" type="number" size="small" fullWidth />
+        <RowsSelector rows={paragraph?.properties.rowsNumber ?? 2} />
       </Grid>
     </Grid>
   );

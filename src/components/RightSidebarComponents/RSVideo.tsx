@@ -1,8 +1,22 @@
-import React from "react";
-import { Typography, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { Video } from "../../Models/Video";
+import WidthSelector from "./WidthSelector";
+import HeightSelector from "./HeightSelector";
+import MediaSource from "./MediaSource";
 
-const RSVideo: React.FC = () => {
+interface RSVideoProps {
+  item: Video;
+}
+
+const RSVideo: React.FC<RSVideoProps> = ({ item }) => {
+  const [video, setVideo] = useState<Video>();
+
+  useEffect(() => {
+    setVideo(item);
+  }, [item]);
+
   return (
     <Grid
       container
@@ -16,11 +30,9 @@ const RSVideo: React.FC = () => {
       </Grid>
 
       <Grid size={12}>
-        <TextField
-          label="Video Source"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
+        <MediaSource
+          label="Media Source"
+          source={video?.properties.src || ""}
         />
       </Grid>
 
@@ -31,21 +43,11 @@ const RSVideo: React.FC = () => {
       </Grid>
 
       <Grid size={6}>
-        <TextField
-          label="Height"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <HeightSelector value={video?.properties.height ?? 350} />
       </Grid>
 
       <Grid size={6}>
-        <TextField
-          label="Width"
-          fullWidth
-          size="small"
-          style={{ width: "100%" }}
-        />
+        <WidthSelector num={video?.properties.width || 250} />
       </Grid>
     </Grid>
   );
