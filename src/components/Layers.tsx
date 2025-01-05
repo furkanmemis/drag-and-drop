@@ -18,6 +18,13 @@ const Layers: React.FC<LayerProps> = ({ items}) => {
     setAllComponent(allItem);
   };
 
+  const itemName: Record<string, string> = {
+    heading: "Heading",
+    paragraph: "Paragraph",
+    image: "Image",
+    video: "Video",
+  };
+
   return (
     <Box
       sx={{
@@ -56,7 +63,7 @@ const Layers: React.FC<LayerProps> = ({ items}) => {
             alignItems: "center",
           }}
         >
-          <Typography>{component}</Typography>
+          <Typography>{itemName[component]}</Typography>
           <IconButton onClick={()=>{deleteItem(index)}}>
             <DeleteIcon style={{ color: "#B03A2E" }} />
           </IconButton>
