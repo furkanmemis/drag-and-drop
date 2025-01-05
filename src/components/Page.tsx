@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
 import EditParagraph from "./EditComponents/EditParagraph";
@@ -6,19 +6,27 @@ import EditHeading from "./EditComponents/EditHeading";
 import EditImage from "./EditComponents/EditImage";
 import EditVideo from "./EditComponents/EditVideo";
 import Grid from "@mui/material/Grid2";
+import { StyleItem } from "../Models/StyleItem";
+import { Paragraph } from "../Models/Paragraph";
+import { Heading } from "../Models/Heading";
 
 
 interface DropTargetProps {
   onDrop: (itemId: string) => void;
   onClickSelectedItem: (itemName: string, selectedIndex: number) => void;
+  list: StyleItem[];
+  onChangeList: (newList: StyleItem[]) => void;
 }
 
 const Page: React.FC<DropTargetProps> = ({
   onDrop,
   onClickSelectedItem,
+  list,
+  onChangeList,
 }) => {
   const [droppedItems, setDroppedItems] = React.useState<string[]>([]);
   const dropRef = useRef(null);
+  const [allList, setAllList] = useState<StyleItem[]>([]);
 
 
   const [{ isOver }, drop] = useDrop(() => ({
@@ -38,10 +46,20 @@ const Page: React.FC<DropTargetProps> = ({
     }
   }, [drop, dropRef]);
 
+  useEffect(()=>{
+    setAllList(list);
+  },[list])
+
   const handleSelectedItem = (itemName: string, index: number) => {
     onClickSelectedItem(itemName,index);
   };
 
+  const handleUpdated = (index: number, data: any) => {
+    const updatedList = [...allList];
+    updatedList[index] = data;
+    setAllList(updatedList);
+    onChangeList(updatedList);
+  }
 
 
   const renderItem = (item: string, selectedIndex: number) => {
@@ -52,6 +70,8 @@ const Page: React.FC<DropTargetProps> = ({
             onClickParagraph={(itemName) => {
               handleSelectedItem(itemName,selectedIndex);
             }}
+            item={allList[selectedIndex] as Paragraph}
+            onParagraphChange={(newParagraph) => {handleUpdated(selectedIndex,newParagraph)}}
           />
         </Grid>
       );
@@ -62,6 +82,8 @@ const Page: React.FC<DropTargetProps> = ({
             onClickHeading={(itemName) => {
               handleSelectedItem(itemName,selectedIndex);
             }}
+            item={allList[selectedIndex] as Heading}
+            onChangeHeading={(newHeading) => {handleUpdated(selectedIndex,newHeading)}}
           />
         </Grid>
       );

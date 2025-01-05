@@ -93,6 +93,8 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
           setSelectedItem(itemName);
           setSelectedItemIndex(selectedIndex);
         }}
+        list={styleList}
+        onChangeList={(newList) => {setStyleList(newList)}}
       />
       <RightSidebar selectedItem={selectedItem} index={selectedItemIndex} list={styleList} onListChange={(list) => {setStyleList(list); onChangeList(list);}} />
     </Box>
