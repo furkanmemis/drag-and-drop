@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import { Typography, Box, Button } from "@mui/material";
 import { StyleItem } from "../Models/StyleItem";
+import { downloadJson } from "../services/DownloadJSON";
 
 interface NavbarProps{
     list: StyleItem[];
@@ -17,25 +18,10 @@ const Navbar: React.FC<NavbarProps> = ({list}) => {
 
 
     const handleDownload = () => {
-
         let download = {
             "elements": styleList
         }
-    
-        const blob = new Blob([JSON.stringify(download, null, 2)], {
-          type: "application/json",
-        });
-    
-        const url = URL.createObjectURL(blob);
-    
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "style.json";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    
-        URL.revokeObjectURL(url);
+        downloadJson(download);
       };
 
     return (
