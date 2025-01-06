@@ -65,11 +65,11 @@ const RSParagraph: React.FC<RSParagrapProps> = ({item, index, onChangeParagraph}
       </Grid>
 
       <Grid size={12}>
-        <FontFamilySelector font={paragraph?.properties.fontFamily || "arial"} onFamilyChange={(newFamily) => {handleParagraphChange("fontFamily",newFamily)}} />
+        <FontFamilySelector font={paragraph?.properties.fontFamily || "inherit"} onFamilyChange={(newFamily) => {handleParagraphChange("fontFamily",newFamily)}} />
       </Grid>
 
       <Grid size={12}>
-        <FontWeightSelector weight={paragraph?.properties.fontWeight || "bold"} onWeightChange={(newWeight)=>{handleParagraphChange("fontFamily",newWeight)}}/>
+        <FontWeightSelector weight={paragraph?.properties.fontWeight || "bold"} onWeightChange={(newWeight)=>{handleParagraphChange("fontWeight",newWeight)}}/>
       </Grid>
 
       <Grid size={12}>

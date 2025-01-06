@@ -122,11 +122,10 @@ const Page: React.FC<DropTargetProps> = ({
           marginTop: "5%",
           overflow: "auto",
           padding: "5%",
-          textAlign: "center",
           border: "2px solid rgba(0, 0, 0, 0.2)",
         }}
       >
-        <Typography variant="h6">
+        <Typography variant="h6" style={{textAlign: "center"}}>
           {isOver ? "Drop here" : "Drop your items"}
         </Typography>
 

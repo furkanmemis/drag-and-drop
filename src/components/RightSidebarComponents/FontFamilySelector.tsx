@@ -24,11 +24,11 @@ const FontFamilySelector: React.FC<FontSelectorProps> = ({ font, onFamilyChange 
       displayEmpty
       size="small"
     >
-      <MenuItem value="arial">Arial</MenuItem>
-      <MenuItem value="italic">Italic</MenuItem>
-      <MenuItem value="times-new-roman">Times New Roman</MenuItem>
-      <MenuItem value="verdana">Verdana</MenuItem>
-      <MenuItem value="georgia">Georgia</MenuItem>
+      <MenuItem value="cursive">Cursive</MenuItem>
+      <MenuItem value="fantasy">Fantsy</MenuItem>
+      <MenuItem value="inherit">Inherit</MenuItem>
+      <MenuItem value="serif">Serif</MenuItem>
+      <MenuItem value="monospace">Monospace</MenuItem>
     </Select>
   );
 };

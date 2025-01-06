@@ -31,20 +31,10 @@ const EditParagraph: React.FC<EditParagraphProps> = ({
   }
 
   return (
-    <TextField
-      value={paragraph?.properties.text}
-      label="Paragraph"
-      fullWidth
-      size="medium"
-      rows={paragraph?.properties.rowsNumber}
-      multiline
-      onClick={() => {
-        onClickParagraph("paragraph");
-      }}
-      onChange={(e)=>{
-        handleTextChange(e.target.value);
-      }}
-    />
+
+    <div onClick={()=>{onClickParagraph('paragraph')}} style={{minHeight: "10vh"}}>
+      <p style={{padding: "3%", fontSize: paragraph?.properties.fontSize+"px", fontWeight: paragraph?.properties.fontWeight, fontFamily: paragraph?.properties.fontFamily, border: "1px solid black"}}>{paragraph?.properties.text}</p>
+    </div>
   );
 };
 

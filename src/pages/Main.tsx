@@ -50,7 +50,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
           return {
             type: "paragraph",
             properties: {
-              fontFamily: "italic",
+              fontFamily: "inherit",
               fontWeight: "medium",
               text: "",
               rowsNumber: 3,
@@ -61,7 +61,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
           return {
             type: "heading",
             properties: {
-              fontFamily: "arial",
+              fontFamily: "inherit",
               fontWeight: "bold",
               text: "",
               rowsNumber: 1,
