@@ -4,10 +4,11 @@ import { TextField } from "@mui/material";
 interface MediaSourceProps {
   label: string;
   source: string;
+  helper: string;
   onChangeSource: (newSource: string) => void;
 }
 
-const MediaSource: React.FC<MediaSourceProps> = ({ label, source, onChangeSource }) => {
+const MediaSource: React.FC<MediaSourceProps> = ({ label, source, onChangeSource, helper }) => {
   const [value, setValue] = useState<string>("");
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const MediaSource: React.FC<MediaSourceProps> = ({ label, source, onChangeSource
           setValue(e.target.value);
           onChangeSource(e.target.value);
         }}
+        helperText={helper}
       />
     </div>
   );

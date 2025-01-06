@@ -10,6 +10,7 @@ import { StyleItem } from "../Models/StyleItem";
 import { Paragraph } from "../Models/Paragraph";
 import { Heading } from "../Models/Heading";
 import { Image } from "../Models/Image";
+import { Video } from "../Models/Video";
 
 
 interface DropTargetProps {
@@ -106,6 +107,7 @@ const Page: React.FC<DropTargetProps> = ({
             onClickVideo={(itemName) => {
               handleSelectedItem(itemName,selectedIndex);
             }}
+            video={allList[selectedIndex] as Video}
           />
         </Grid>
       );

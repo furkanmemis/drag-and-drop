@@ -57,6 +57,7 @@ const RSImage: React.FC<RSImageProps> = ({ item, index, onChangeImage }) => {
           onChangeSource={(newSource) => {
             handleImageChange("src", newSource);
           }}
+          helper="Copy image url"
         />
       </Grid>
 

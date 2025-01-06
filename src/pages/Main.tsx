@@ -33,7 +33,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
             type: "image",
             properties: {
               src: "",
-              width: 400,
+              width: 550,
               height: 300,
             },
           } as Image;
@@ -42,7 +42,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
             type: "video",
             properties: {
               src: "",
-              width: 400,
+              width: 550,
               height: 300,
             },
           } as Video;

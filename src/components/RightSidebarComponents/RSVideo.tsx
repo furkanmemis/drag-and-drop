@@ -57,6 +57,7 @@ const RSVideo: React.FC<RSVideoProps> = ({ item, index, onChangeVideo }) => {
           onChangeSource={(newSource) => {
             handleVideoChange("src", newSource);
           }}
+          helper="Copy Youtube video url"
         />
       </Grid>
 
