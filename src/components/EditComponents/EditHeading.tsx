@@ -45,6 +45,13 @@ const EditHeading: React.FC<EditHeadingProps> = ({
         handleTextChange(e.target.value);
       }}
       multiline
+      sx={{
+        '& .MuiInputBase-root':{
+          fontFamily: heading?.properties.fontFamily,
+          fontSize: heading?.properties.fontSize,
+          fontWeight: heading?.properties.fontWeight
+        }
+      }}
     />
   );
 };

@@ -20,21 +20,38 @@ const EditParagraph: React.FC<EditParagraphProps> = ({
 
   const handleTextChange = (newParagraph: string) => {
     let updatedParagraph = {
-        ...paragraph,
-        properties:{
-            ...paragraph?.properties,
-            text: newParagraph
-        }
-    }
+      ...paragraph,
+      properties: {
+        ...paragraph?.properties,
+        text: newParagraph,
+      },
+    };
     setParagraph(updatedParagraph as Paragraph);
     onParagraphChange(updatedParagraph as Paragraph);
-  }
+  };
 
   return (
-
-    <div onClick={()=>{onClickParagraph('paragraph')}} style={{minHeight: "10vh"}}>
-      <p style={{padding: "3%", fontSize: paragraph?.properties.fontSize+"px", fontWeight: paragraph?.properties.fontWeight, fontFamily: paragraph?.properties.fontFamily, border: "1px solid black"}}>{paragraph?.properties.text}</p>
-    </div>
+    <TextField
+      value={paragraph?.properties.text}
+      label="Paragraph"
+      fullWidth
+      size="medium"
+      rows={paragraph?.properties.rowsNumber}
+      multiline
+      onClick={() => {
+        onClickParagraph("paragraph");
+      }}
+      onChange={(e) => {
+        handleTextChange(e.target.value);
+      }}
+      sx={{
+        '& .MuiInputBase-root':{
+          fontFamily: paragraph?.properties.fontFamily,
+          fontSize: paragraph?.properties.fontSize,
+          fontWeight: paragraph?.properties.fontWeight
+        }
+      }}
+    />
   );
 };
 

@@ -26,7 +26,7 @@ const FontWeightSelector: React.FC<FontWeightSelectorProps> = ({ weight, onWeigh
       size="small"
     >
       <MenuItem value="bold">Bold</MenuItem>
-      <MenuItem value="semibold">Semibold</MenuItem>
+      <MenuItem value="bolder">Bolder</MenuItem>
       <MenuItem value="medium">Medium</MenuItem>
       <MenuItem value="thin">Thin</MenuItem>
       <MenuItem value="normal">Normal</MenuItem>
