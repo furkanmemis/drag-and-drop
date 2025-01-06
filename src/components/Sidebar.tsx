@@ -6,15 +6,25 @@ import Media from "./Media";
 
 interface SidebarProps{
     newItem: string;
+    onChangeDelete: (approve: boolean, index: number) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({newItem}) => {
+const Sidebar: React.FC<SidebarProps> = ({newItem, onChangeDelete}) => {
     const [item, setItem] = useState<string[]>([]);
     useEffect(() => {
         if (newItem !== "") {
             setItem((prevItems) => [...prevItems, newItem]);
         }
     }, [newItem]);
+
+
+    const deleteItem = (approve: boolean, index: number) => {
+        if(approve && index !== -1){
+            const newList = item.filter((_,ind) => ind !== index);
+            setItem(newList);
+            onChangeDelete(approve,index);
+        }
+    }
 
     return (
         <Box
@@ -34,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({newItem}) => {
             </Button>
             <Text />
             <Media />
-            <Layers items={item}/>
+            <Layers items={item} onChangeDelete={(approve, index) => {deleteItem(approve,index)}}/>
         </Box>
     );
 };

@@ -18,6 +18,7 @@ interface DropTargetProps {
   onClickSelectedItem: (itemName: string, selectedIndex: number) => void;
   list: StyleItem[];
   onChangeList: (newList: StyleItem[]) => void;
+  deletedIndex: number;
 }
 
 const Page: React.FC<DropTargetProps> = ({
@@ -25,10 +26,12 @@ const Page: React.FC<DropTargetProps> = ({
   onClickSelectedItem,
   list,
   onChangeList,
+  deletedIndex,
 }) => {
   const [droppedItems, setDroppedItems] = React.useState<string[]>([]);
   const dropRef = useRef(null);
   const [allList, setAllList] = useState<StyleItem[]>([]);
+  const [deleteIndex, setDeleteIndex] = useState<number>(-1);
 
 
   const [{ isOver }, drop] = useDrop(() => ({
@@ -51,6 +54,17 @@ const Page: React.FC<DropTargetProps> = ({
   useEffect(()=>{
     setAllList(list);
   },[list])
+
+  useEffect(()=>{
+    if(deletedIndex !== -1){
+      const newList = droppedItems.filter((_,ind) => ind !== deletedIndex);
+      const styleListNew = allList.filter((_,ind) => ind !== deletedIndex);
+      setDeleteIndex(deletedIndex);
+      setDroppedItems(newList);
+      setAllList(styleListNew);
+    }
+
+  },[deletedIndex])
 
   const handleSelectedItem = (itemName: string, index: number) => {
     onClickSelectedItem(itemName,index);

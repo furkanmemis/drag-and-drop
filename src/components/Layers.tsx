@@ -4,18 +4,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 interface LayerProps {
   items: string[];
+  onChangeDelete: (approve: boolean, index: number) => void;
 }
 
-const Layers: React.FC<LayerProps> = ({ items}) => {
+const Layers: React.FC<LayerProps> = ({ items, onChangeDelete}) => {
   const [allComponent, setAllComponent] = useState<string[]>([]);
+  const [deleteApprove, setDeleteApprove] = useState<boolean>(false);
+  const [deletedIndex, setDeletedIndex] = useState<number>(-1);
 
   useEffect(() => {
     setAllComponent(items);
   }, [items]);
 
   const deleteItem = (removedIndex: number) => {
-    const allItem = allComponent.filter((_, index) => index !== removedIndex);
-    setAllComponent(allItem);
+    if(deleteApprove && deletedIndex !== -1){
+      const allItem = allComponent.filter((_, index) => index !== removedIndex);
+      setAllComponent(allItem);
+
+      setTimeout(()=>{
+        setDeleteApprove(false);
+        setDeletedIndex(-1);
+      },50);
+    }
+
   };
 
   const itemName: Record<string, string> = {
@@ -64,7 +75,7 @@ const Layers: React.FC<LayerProps> = ({ items}) => {
           }}
         >
           <Typography>{itemName[component]}</Typography>
-          <IconButton onClick={()=>{deleteItem(index)}}>
+          <IconButton onClick={()=>{setDeleteApprove(true);setDeletedIndex(index); deleteItem(index); onChangeDelete(true,index)}}>
             <DeleteIcon style={{ color: "#B03A2E" }} />
           </IconButton>
         </Box>

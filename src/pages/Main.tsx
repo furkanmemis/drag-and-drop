@@ -19,6 +19,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0);
   const [add, setAdd] = useState<string>("");
   const [styleList, setStyleList] = useState<StyleItem[]>([]);
+  const [deletedIndex, setDeletedIndex] = useState<number>(-1);
 
   const handleDrop = (itemId: string) => {
     setAdd(itemId);
@@ -80,13 +81,26 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
     });
   };
 
+  const deleteItem = (approve: boolean, index: number) => {
+    if(approve && index !== -1){
+      const newStyleList = styleList.filter((_,ind) => ind !== index);
+      setStyleList(newStyleList);
+      onChangeList(newStyleList);
+      setDeletedIndex(index);
+    }
+
+    setTimeout(()=>{
+      setDeletedIndex(-1);
+    },500)
+  }
+
   return (
     <Box
       sx={{
         display: "flex",
       }}
     >
-      <Sidebar newItem={add} />
+      <Sidebar newItem={add} onChangeDelete={(approve,index) => {deleteItem(approve,index)}} />
       <Content
         onDrop={handleDrop}
         onClickSelectedItem={(itemName,selectedIndex) => {
@@ -95,6 +109,7 @@ const Main: React.FC<MainProps> = ({onChangeList}) => {
         }}
         list={styleList}
         onChangeList={(newList) => {setStyleList(newList); onChangeList(newList);}}
+        deletedIndex={deletedIndex}
       />
       <RightSidebar selectedItem={selectedItem} index={selectedItemIndex} list={styleList} onListChange={(list) => {setStyleList(list); onChangeList(list);}} />
     </Box>
