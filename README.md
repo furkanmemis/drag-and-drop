@@ -1,12 +1,19 @@
-# Getting Started with Create React App
+## Before You Start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```bash
+npm install --legacy-peer-deps
+```
 
-## Available Scripts
+## For the start
 
-In the project directory, you can run:
+```bash
+npm start
+```
 
-### `npm start`
+## For Media Components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Copy for youtube video url
+![Youtube](public/images/youtube.png)
+
+### Copy for image url
+![Image](public/images/image.png)
