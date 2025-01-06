@@ -10,14 +10,7 @@ interface SidebarProps{
 
 const Sidebar: React.FC<SidebarProps> = ({newItem}) => {
     const [item, setItem] = useState<string[]>([]);
-
-    const addItem = () =>{
-        setItem([...item, "Content"])
-    };
-
     useEffect(() => {
-        console.log("side bar -> ", newItem)
-
         if (newItem !== "") {
             setItem((prevItems) => [...prevItems, newItem]);
         }
@@ -36,7 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({newItem}) => {
                 alignItems: "center"
             }}
         >
-            <Button variant="contained" size="small" style={{backgroundColor: "#003366", width: "10vw", marginTop: "4%"}} onClick={()=>{addItem()}}>
+            <Button variant="contained" size="small" style={{backgroundColor: "#003366", width: "10vw", marginTop: "4%"}}>
                 Add Item
             </Button>
             <Text />
