@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid2";
 import { StyleItem } from "../Models/StyleItem";
 import { Paragraph } from "../Models/Paragraph";
 import { Heading } from "../Models/Heading";
+import { Image } from "../Models/Image";
 
 
 interface DropTargetProps {
@@ -94,6 +95,7 @@ const Page: React.FC<DropTargetProps> = ({
             onClickImage={(itemName) => {
               handleSelectedItem(itemName,selectedIndex);
             }}
+            image={allList[selectedIndex] as Image}
           />
         </Grid>
       );
